@@ -1,0 +1,43 @@
+
+useState return a stateful value, and a function to update it.
+
+function Counter({initialCount}) {
+  const [count, setCount] = useState(initialCount);
+  return (
+    <>
+      Count: {count}
+      <button onClick={() => setCount(initialCount)}>Reset</button>
+      <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+    </>
+  );
+}
+
+useEffect is used when we want to setup side effects outside of component
+Hooks can not be set as conditions
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+                            USE REDUCER
+
+const initialState = {count: 0};
+function reducer(state, action) {
+      switch (action.type) {
+        case 'increment':
+          return {count: state.count + 1};
+        case 'decrement':
+          return {count: state.count - 1};
+        default:
+          throw new Error();
+      }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+    </>
+  );
+}

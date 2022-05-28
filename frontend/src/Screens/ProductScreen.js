@@ -17,7 +17,7 @@ export default function ProductScreen(props) {
 
     useEffect(()=>{
         dispatch(detailsProduct(params.id));
-    }, [])
+    }, [dispatch, params.id])
 
     const addToCartHandler = () => {
         navigate(`/cart/${params.id}?qty=${qty}`);

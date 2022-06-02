@@ -1,7 +1,10 @@
 from django.urls import path
 from .views import *
 
+app_name = 'mainapp'
+
 urlpatterns = [
-    path('products/', products),
-    path('product/<int:pk>/', productDetail)
+    path('products/', products, name='products'),
+    path('product/<int:pk>/', productDetail, name='product'),
+    path('users/signin/', loginPage, name='login')
 ]

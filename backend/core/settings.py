@@ -145,3 +145,13 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'backend')
 
 # URL used to access the media
 MEDIA_URL = '/media/'
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.DjangoModelPermissions',
+    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}

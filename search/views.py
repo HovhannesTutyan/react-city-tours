@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from django.db.models import Q
 from .models import Product
 from .serializers import ProductSerializer
+from rest_framework import permissions, status
 import math
 
 class ProductFrontendAPIView(APIView):
@@ -40,3 +41,22 @@ class ProductBackendAPIView(APIView):
             "page": page,
             "last_page": math.ceil(total / per_page)
         })
+
+class ProductDetailAPIView(APIView):
+    def get(self, request, productId, format=None):
+        try:
+            product_id=int(productId)
+        except:
+            return Response(
+                {'error':'Product ID must be an integer'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        if Product.objects.filter(id=product_id).exists():
+            product = Product.objects.get(id=product_id)
+            product = ProductSerializer(product)
+            return Response({'product':product.data}, status=status.HTTP_200_OK)
+        else:
+            return Response(
+                {'error':'Product with this ID does not exist'},
+                status=status.HTTP_404_NOT_FOUND
+            )

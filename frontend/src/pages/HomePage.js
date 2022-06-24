@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
+import Backend from '../pages/Backend';
 
 const HomePage = () => {
 
@@ -12,9 +13,7 @@ const HomePage = () => {
                     headers: {'Content-Type': 'application/json'},
                     credentials: 'include',
                 });
-
                 const content = await response.json();
-
                 setName(content.name);
             }
         )();
@@ -23,6 +22,8 @@ const HomePage = () => {
         <div>
             < Header />
             <p> { name ? "Hi " + name : 'You are not logged in'} </p>
+
+            < Backend />
         </div>
     )
 }
